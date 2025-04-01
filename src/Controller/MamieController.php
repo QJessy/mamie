@@ -19,7 +19,7 @@ final class MamieController extends AbstractController
         ]);
     }
 
-    #[Route('/ajout_cafe', name: 'app_ajout_cafe')]
+    #[Route('/admin-ajout_cafe', name: 'app_ajout_cafe', methods: ['GET', 'POST'])]
     public function ajoutCafe(Request $request, EntityManagerInterface $em): Response
     {
         $cafe = new Cafe();

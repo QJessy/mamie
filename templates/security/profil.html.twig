@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}Profil
+{% endblock %}
+
+{% block body %}
+	<section style="background-color: #eee;">
+		<div class="container py-5">
+			<div class="row">
+				<div class="col">
+					<nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
+						<ol class="breadcrumb mb-0">
+							<li class="breadcrumb-item">
+								<a href="{{path('app_accueil')}}">Accueil</a>
+							</li>
+							<li class="breadcrumb-item active" aria-current="page">Profil</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="card mb-4">
+						<div class="card-body text-center">
+							{% set nom = 'images/profils/' ~ profils.image %}
+							<img src="{{asset(nom)}}" class="card-img-top" alt="Photo de profil de : {{ profils.nom }} {{ profils.prenom }}" class="rounded-circle img-fluid" style="width: 150px;">
+							<h5 class="my-3">{{ profils.prenom | capitalize }}
+								{{ profils.nom | upper }}</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="card mb-4">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Nom</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{ profils.nom | upper }}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Prénom</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{ profils.prenom | capitalize }}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Date de naissance</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{ profils.dateNaissance | date('d-m-Y') }}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Email</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">{{ profils.email | lower }}</p>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-3">
+									<p class="mb-0">Rôle</p>
+								</div>
+								<div class="col-sm-9">
+									<p class="text-muted mb-0">
+										{% if "ROLE_ADMIN" in profils.roles %}
+											<td>Administrateur</td>
+										{% elseif "ROLE_MOD" in profils.roles %}
+											<td>Modérateur</td>
+										{% else %}
+											<td>Utilisateur</td>
+										{% endif %}
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
